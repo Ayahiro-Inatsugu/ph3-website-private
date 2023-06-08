@@ -1,22 +1,22 @@
 version: '3.9'
 services:
-  l10dev-nginx:
-    container_name: "l10dev-nginx"
+  nginx:
+    container_name: "nginx"
     build:
       context: ./docker/nginx
     depends_on:
-      - l10dev-app
+      - app
     ports:
       - 8080:80
     volumes:
       - ./:/src
 
-  l10dev-app:
-    container_name: "l10dev-app"
+  app:
+    container_name: "app"
     build:
       context: ./docker/php
     depends_on:
-      - l10dev-mysql
+      - mysql
     ports:
       - 5173:5173
     volumes:
@@ -25,20 +25,31 @@ services:
       - /src/vendor
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini
 
-  l10dev-mysql:
+  mysql:
     image: mysql:8.0.33
     command: --max_allowed_packet=32505856
-    container_name: "l10dev-mysql"
+    container_name: "mysql"
     volumes:
       - ./docker/mysql:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=l10dev
+      - MYSQL_DATABASE=posse
     ports:
       - 3306:3306
 
-  l10dev-redis:
+  redis:
     image: redis:alpine
-    container_name: "l10dev-redis"
+    container_name: "redis"
     ports:
       - 16379:6379
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    environment:
+      PMA_HOST: 'mysql' # ホストはデータベースサーバーのサービス名
+      PMA_USER: 'root' # デフォルトでログインしているユーザー(今回はルートユーザー)
+      PMA_PASSWORD: 'root' # 上記ユーザーのパスワード(今回はルートユーザーのパスワード)
+    links:
+      - mysql
+    ports:
+      - 8081:80

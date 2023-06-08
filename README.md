@@ -1,6 +1,6 @@
 <h2>サーバー立ち上げ</h2>
 docker compose up -d # コンテナ立ち上げ
-docker compose exec l10dev-app bash # コンテナに入る
+docker compose exec app bash # コンテナに入る
 composer install # ライブラリインストール
 npm install # ライブラリインストール
 
