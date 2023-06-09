@@ -18,6 +18,10 @@ return new class extends Migration
             $table->boolean('is_correct');
             $table->timestamps();
         });
+
+        Schema::table('questions', function (Blueprint $table) {
+            $table->softDeletes();
+        });
     }
 
     /**
