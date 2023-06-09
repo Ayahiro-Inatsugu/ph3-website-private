@@ -12,9 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('options', function (Blueprint $table) {
-            $table->id('option_id');
-            $table->integer('option_question_id');
-            $table->string('option_text');
+            $table->id();
+            $table->foreignId('question_id')->constrained('questions')->onDelete('cascade'); // Foreign key
+            $table->string('text');
+            $table->boolean('is_correct');
             $table->timestamps();
         });
     }

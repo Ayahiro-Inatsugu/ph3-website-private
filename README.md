@@ -22,10 +22,11 @@ php artisan db:seed # シーダー実行 <br>
 ``` <br>
 
 <p>ER図</p>
-+--------------+        +---------------+        +-------------+<br>
-|   Questions  |        |    Choices    |        |   Answers   |<br>
-+--------------+        +---------------+        +-------------+<br>
-| question_id  |        | choice_id     |        | answer_id   |<br>
-| question_text|   1    | question_id   |   *    | question_id |<br>
-+--------------+--------| choice_text   |----*---| choice_id   |<br>
-                        +---------------+        +-------------+<br>
++--------------+        +---------------+
+|   Questions  |        |    Choices    |
++--------------+        +---------------+
+| question_id  |        | choice_id     |
+| question_text|   1    | question_id   |
++--------------+--------| choice_text   |
+                        | valid         |
+                        +---------------+
