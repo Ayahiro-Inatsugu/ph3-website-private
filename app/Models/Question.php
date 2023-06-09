@@ -9,4 +9,9 @@ class Question extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    public function options()
+    {
+        return $this->hasMany(Option::class);
+    }
 }

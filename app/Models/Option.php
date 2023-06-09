@@ -9,4 +9,9 @@ class Option extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    
+    public function question()
+    {
+        return $this->belongsTo(Question::class);
+    }
 }
