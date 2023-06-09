@@ -17,7 +17,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::table('options', function (Blueprint $table) {
+        Schema::table('questions', function (Blueprint $table) {
             $table->softDeletes();
         });
     }
