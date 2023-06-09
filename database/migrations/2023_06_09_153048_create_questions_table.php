@@ -15,9 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('text');
             $table->timestamps();
-        });
-
-        Schema::table('questions', function (Blueprint $table) {
             $table->softDeletes();
         });
     }

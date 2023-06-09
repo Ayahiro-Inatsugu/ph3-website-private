@@ -17,9 +17,6 @@ return new class extends Migration
             $table->string('text');
             $table->boolean('is_correct');
             $table->timestamps();
-        });
-
-        Schema::table('options', function (Blueprint $table) {
             $table->softDeletes();
         });
     }
