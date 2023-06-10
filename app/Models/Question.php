@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Question extends Model
 {
@@ -14,29 +15,21 @@ class Question extends Model
     {
         return $this->hasMany(Option::class);
     }
-}
 
-public function delete() {
-    $this->performDeleteOnModel();
-}
+    // レコードを追加
+    public function add(array $data)
+    {
+        $question = new Question();
+        $question->text = $data['text'];
+        $question->save();
 
-public function performDeleteOnModel() {
-    $this->runSoftDelete();
-}
+        foreach ($data['options'] as $option) {
+            $question->options()->create([
+                'text' => $option['text'],
+                'is_correct' => $option['is_correct'],
+            ]);
+        }
 
-public function runSoftDelete() {
-    $query = $this->setKeysForSaveQuery($this->newModelQuery());
-    $time = $this->freshTimestamp();
-    $columns = [$this->getDeletedAtColumn() => $this->fromDateTime($time)];
-
-    $this->{$this->getDeletedAtColumn()} = $time;
-
-    if ($this->timestamps && ! is_null($this->getUpdatedAtColumn())) {
-        $this->{$this->getUpdatedAtColumn()} = $time;
-        $columns[$this->getUpdatedAtColumn()] = $this->fromDateTime($time);
+        return $question;
     }
-
-    $query->update($columns);
-
-    $this->syncOriginalAttributes(array_keys($columns));
 }

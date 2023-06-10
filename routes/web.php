@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\QuizController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,4 +34,8 @@ require __DIR__.'/auth.php';
 
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
 
-Route::resource('quizzes', QuizController::class)
+Route::get('/quizzes',[QuizController::class, 'index'])->name('quizzes.index');
+
+Route::get('/quizzes/create', [QuizController::class, 'create'])->name('quizzes.create');
+
+Route::post('/quizzes/create', [QuizController::class, 'createQuiz'])->name('quizzes.createQuiz');
