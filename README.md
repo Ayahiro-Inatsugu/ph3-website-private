@@ -23,10 +23,10 @@ php artisan db:seed # シーダー実行 <br>
 
 <p>ER図</p>
 +--------------+        +---------------+
-|   Questions  |        |    Choices    |
+|   Questions  |        |    Options    |
 +--------------+        +---------------+
-| question_id  |        | choice_id     |
-| question_text|   1    | question_id   |
-+--------------+--------| choice_text   |
-                        | valid         |
+| id           |        | id            |
+| text         |        | question_id   |
++--------------+--------| text          |
+                        | is_correct    |
                         +---------------+

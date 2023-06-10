@@ -12,9 +12,24 @@ class QuizController extends Controller
     /*
      * Display a listing of the resource.
      */
+    // クイズのデータをwithで取得する
+    public function getQuizData()
+    {
+        $quizzes = Question::with('options')->get();
+        return $quizzes;
+    }
+
+    // クイズのデータを取得してindex.blade.phpに渡す
     public function index()
     {
-        return view('quizzes.index');
+        $quizzes = $this->getQuizData();
+        return view('quizzes.index', ['quizzes' => $quizzes]);
+    }
+
+    // 新規作成画面を表示する
+    public function create()
+    {
+        return view('quizzes.create');
     }
 
     /**
@@ -25,13 +40,6 @@ class QuizController extends Controller
      * @param string $third
      * @param int $answer
      */
-
-    // 新規作成画面を表示する
-    public function create()
-    {
-        return view('quizzes.create');
-    }
-
     public function createQuiz($question, $first, $second, $third, $answer)
     {
         Question::create([
