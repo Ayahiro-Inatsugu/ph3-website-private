@@ -16,6 +16,13 @@ class Question extends Model
         return $this->hasMany(Option::class);
     }
 
+    // クイズのデータをwithで取得する
+    public function getQuizData()
+    {
+        $quizzes = Question::with('options')->get();
+        return $quizzes;
+    }
+
     // レコードを追加
     public function add(array $data)
     {

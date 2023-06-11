@@ -1,8 +1,3 @@
-<?php
-// dd($quizzes);
-$option_model = new App\Models\Option;
-?>
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>

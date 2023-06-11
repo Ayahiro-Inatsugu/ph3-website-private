@@ -10,19 +10,13 @@ use Illuminate\Support\Facades\Auth;
 class QuizController extends Controller
 {
     /*
-     * Display a listing of the resource.
-     */
-    // クイズのデータをwithで取得する
-    public function getQuizData()
-    {
-        $quizzes = Question::with('options')->get();
-        return $quizzes;
-    }
-
+    * Display a listing of the resource.
+    */
     // クイズのデータを取得してindex.blade.phpに渡す
     public function index()
     {
-        $quizzes = $this->getQuizData();
+        $question_model = new Question();
+        $quizzes = $question_model->getQuizData();
         return view('quizzes.index', ['quizzes' => $quizzes]);
     }
 
