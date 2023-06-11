@@ -15,15 +15,27 @@ class QuestionSeeder extends Seeder
     {
         //
         Question::create([
-            'text' => 'この地名はなんて読む？：高輪',
+            'text' => '日本のIT人材が2030年には最大どれくらい不足すると言われているでしょうか？',
         ]);
 
         Question::create([
-            'text' => 'この地名はなんて読む？：亀戸',
+            'text' => '既存業界のビジネスと、先進的なテクノロジーを結びつけて生まれた、新しいビジネスのことをなんと言うでしょう？',
         ]);
 
         Question::create([
-            'text' => 'この地名はなんて読む？：麹町',
+            'text' => 'IoTとは何の略でしょう？',
+        ]);
+
+        Question::create([
+            'text' => 'ゆうきの出身地はどこでしょう？',
+        ]);
+
+        Question::create([
+            'text' => 'りょうがバイトしているのはどこでしょう？',
+        ]);
+
+        Question::create([
+            'text' => 'たかぴろが一番得意な楽器は何でしょう？',
         ]);
     }
 }

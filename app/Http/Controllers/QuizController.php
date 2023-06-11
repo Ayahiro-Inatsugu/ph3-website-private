@@ -27,39 +27,16 @@ class QuizController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     * @param string $question
-     * @param string $first
-     * @param string $second
-     * @param string $third
-     * @param int $answer
-     */
-    public function createQuiz($question, $first, $second, $third, $answer)
-    {
-        Question::create([
-            'text' => $question,
-            'options' => [
-                ['text' => $first, 'is_correct' => false],
-                ['text' => $second, 'is_correct' => false],
-                ['text' => $third, 'is_correct' => false]
-            ],
-        ]);
-
-        // $answerの値によってoptionsのis_correctを変更する
-        $question = Question::latest()->first();
-        $question->options[$answer - 1]->is_correct = true;
-        $question->save();
-
-        session()->flash('message', 'クイズを作成しました');
-        return redirect()->route('quizzes.index');
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
         //
+        $question_model = new Question();
+        $question_model->add($request->all());
+
+        session()->flash('message', 'クイズを作成しました');
+        return redirect()->route('quizzes.index');
     }
 
     /**

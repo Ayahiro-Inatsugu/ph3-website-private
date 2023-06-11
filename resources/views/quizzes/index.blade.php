@@ -35,11 +35,17 @@
             </div>
             <div class="flex flex-col items-center justify-center w-full gap-2">
               <p>{{ $quiz->text }}</p>
-              <p>正解：選択肢{{ $quiz->answer }}</p>
             </div>
             <div class="flex flex-col items-center justify-center w-full gap-2">
               @foreach ($quiz->options as $option_key => $option)
-              <p>選択肢{{ $option_key + 1 }}：{{ $option->text }}</p>
+              <p>
+                選択肢{{ $option_key + 1 }}：{{ $option->text }}
+                <span>
+                  @if ($option->is_correct)
+                    (正解)
+                  @endif  
+                </span>
+              </p>
               @endforeach
             </div>
           </div>
