@@ -26,7 +26,10 @@ $option_model = new App\Models\Option;
                 <a href="">
                   <button class="border text-white bg-green-400 p-2">編集</button>
                 </a>
-                <button class="border text-white bg-red-500 p-2">削除</button>
+                <button class="border text-white bg-red-500 p-2"
+                        onclick="location.href='{{ route('quizzes.destroy', ['id' => $quiz->id]) }}'">
+                  削除
+                </button>
               </span>
             </div>
             <div class="flex flex-col items-center justify-center w-full gap-2">

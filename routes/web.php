@@ -39,3 +39,7 @@ Route::get('/quizzes',[QuizController::class, 'index'])->name('quizzes.index');
 Route::get('/quizzes/create', [QuizController::class, 'create'])->name('quizzes.create');
 
 Route::post('/quizzes/create', [QuizController::class, 'createQuiz'])->name('quizzes.createQuiz');
+
+// クイズ削除
+Route::get('/quizzes/delete/{id}', [QuizController::class, 'destroy'])->name('quizzes.destroy');
+Route::delete('/quizzes/delete/{id}', [QuizController::class, 'destroy'])->name('quizzes.destroy');
