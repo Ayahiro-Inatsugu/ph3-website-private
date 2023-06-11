@@ -17,7 +17,7 @@ class QuizController extends Controller
     {
         $question_model = new Question();
         $quizzes = $question_model->getQuizData();
-        return view('quizzes.index', ['quizzes' => $quizzes]);
+        return view('quizzes.index', compact('quizzes'));
     }
 
     // 新規作成画面を表示する
