@@ -50,6 +50,7 @@ class QuizController extends Controller
         $question->options[$answer - 1]->is_correct = true;
         $question->save();
 
+        session()->flash('message', 'クイズを作成しました');
         return redirect()->route('quizzes.index');
     }
 
@@ -90,8 +91,9 @@ class QuizController extends Controller
      */
     public function destroy(string $id)
     {
-        $question = Question::find($id);
+        $question = Question::findOrFail($id);
         $question->delete();
+        session()->flash('message', 'クイズを削除しました');
         return redirect()->route('quizzes.index');
     }
 }
