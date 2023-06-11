@@ -12,6 +12,12 @@
     <main class="flex flex-col items-center justify-center w-screen mt-20 mb-20">
       <h1 class="text-4xl font-bold py-12">クイズ</h1>
 
+      @if (session('message'))
+        <div class="alert text-red text-center py-4">
+          {{ session('message') }}
+        </div>
+      @endif
+
       <div class="flex flex-col items-center justify-center w-full gap-12 mt-12">
         @foreach ($quizzes as $quiz_key => $quiz)
           <div class="flex flex-col items-center justify-center w-full gap-4">

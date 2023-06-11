@@ -11,12 +11,12 @@
   <x-layout>
     <main class="flex flex-col items-center justify-center w-screen mt-20 mb-20 gap-16">
       <div class="mb-8">
-        <h1 class="text-4xl font-bold">クイズ新規作成</h1>
+        <h1 class="text-4xl font-bold py-12">クイズ新規作成</h1>
       </div>
       <div>
         <form action="{{ url('/quizzes/add') }}" method="post" class="flex flex-col justify-center w-full gap-12">
           @csrf
-          <div class="flex items-center gap-12">
+          <div class="flex items-center gap-8">
             <label for="question">問題</label>
             <input type="text" name="question" id="question">
           </div>
