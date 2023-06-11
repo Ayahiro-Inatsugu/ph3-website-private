@@ -30,14 +30,29 @@ class QuizController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
-        $question_model = new Question();
-        $question_model->add($request->all());
+{
+    $question = new Question();
+    $question->text = $request->input('question');
+    $question->save();
 
-        session()->flash('message', 'クイズを作成しました');
-        return redirect()->route('quizzes.index');
+    $options = [
+        $request->input('option_first'),
+        $request->input('option_second'),
+        $request->input('option_third')
+    ];
+
+    foreach ($options as $index => $optionText) {
+        $option = new Option();
+        $option->question_id = $question->id;
+        $option->text = $optionText;
+        $option->is_correct = ($request->input('answer') === "option_" . ($index + 1));
+        $option->save();
     }
+
+    session()->flash('message', 'クイズを作成しました');
+    return redirect()->route('quizzes.index');
+}
+
 
     /**
      * Display the specified resource.

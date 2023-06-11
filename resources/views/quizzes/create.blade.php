@@ -14,7 +14,7 @@
         <h1 class="text-4xl font-bold py-12">クイズ新規作成</h1>
       </div>
       <div>
-        <form action="{{ url('/quizzes/add') }}" method="post" class="flex flex-col justify-center w-full gap-12">
+        <form action="{{ route('quizzes.store') }}" method="post" class="flex flex-col justify-center w-full gap-12">
           @csrf
           <div class="flex items-center gap-8">
             <label for="question">問題</label>
@@ -37,12 +37,12 @@
 
           <div>
             <p>正解</p>
-            <input type="radio" name="answer" id="first" value="first">
-            <label for="first">選択肢１</label>
-            <input type="radio" name="answer" id="second" value="second">
-            <label for="second">選択肢２</label>
-            <input type="radio" name="answer" id="third" value="third">
-            <label for="third">選択肢３</label>
+            <input type="radio" name="answer" id="option_1" value="option_1">
+            <label for="option_first">選択肢１</label>
+            <input type="radio" name="answer" id="option_2" value="option_2">
+            <label for="option_second">選択肢２</label>
+            <input type="radio" name="answer" id="option_3" value="option_3">
+            <label for="option_third">選択肢３</label>
           </div>
 
           <div>
