@@ -28,29 +28,17 @@ class QuizController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    // クイズのデータを保存する
     public function store(Request $request)
-{
-    $question = new Question();
-    $question->text = $request->input('question');
-    $question->save();
+    {
+        $data = $request->all();
+        // dd($data);
+        $question = new Question();
+        $question::add($data);
 
-    $options = [
-        $request->input('option_first'),
-        $request->input('option_second'),
-        $request->input('option_third')
-    ];
-
-    foreach ($options as $index => $optionText) {
-        $option = new Option();
-        $option->question_id = $question->id;
-        $option->text = $optionText;
-        $option->is_correct = ($request->input('answer') === "option_" . ($index + 1));
-        $option->save();
+        session()->flash('message', 'クイズを作成しました');
+        return redirect()->route('quizzes.index');
     }
-
-    session()->flash('message', 'クイズを作成しました');
-    return redirect()->route('quizzes.index');
-}
 
 
     /**

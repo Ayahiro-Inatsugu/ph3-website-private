@@ -11,6 +11,11 @@ class Question extends Model
     use HasFactory;
     use SoftDeletes;
 
+    // fillable models
+    protected $fillable = [
+        'text',
+    ];
+
     public function options()
     {
         return $this->hasMany(Option::class);
@@ -23,18 +28,18 @@ class Question extends Model
     }
 
     // レコードを追加
-    public function add(array $data)
+    public static function add(array $data)
     {
         $question = new Question();
-        $question->text = $data['text'];
+        $question->text = $data['question'];
         $question->save();
 
-        foreach ($data['options'] as $option) {
+        foreach ($data['option'] as $key => $option) {
             $question->options()->create([
-                'text' => $option['text'],
-                'is_correct' => $option['is_correct'],
+                'text' => $option,
+                'is_correct' => ((int)$data['answer'] === $key - 1),
             ]);
-        }
+        };
 
         return $question;
     }

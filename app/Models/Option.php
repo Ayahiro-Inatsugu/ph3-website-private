@@ -11,6 +11,12 @@ class Option extends Model
     use HasFactory;
     use SoftDeletes;
 
+    // fillable models
+    protected $fillable = [
+        'text',
+        'is_correct',
+    ];
+
     public function question()
     {
         return $this->belongsTo(Question::class);
