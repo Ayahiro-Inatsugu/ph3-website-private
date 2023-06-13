@@ -15,8 +15,7 @@ class QuizController extends Controller
     // クイズのデータを取得してindex.blade.phpに渡す
     public function index()
     {
-        $question_model = new Question();
-        $quizzes = $question_model->getQuizData();
+        $quizzes = Question::getQuizData();
         return view('quizzes.index', compact('quizzes'));
     }
 

@@ -17,10 +17,9 @@ class Question extends Model
     }
 
     // クイズのデータをwithで取得する
-    public function getQuizData()
+    static function getQuizData()
     {
-        $quizzes = Question::with('options')->get();
-        return $quizzes;
+        return self::with('options')->get();
     }
 
     // レコードを追加
