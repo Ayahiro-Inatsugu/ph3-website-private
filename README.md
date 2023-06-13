@@ -15,6 +15,8 @@ php artisan migrate:rollback # マイグレーションロールバック <br>
 php artisan migrate:refresh # マイグレーションリフレッシュ <br>
 php artisan db:seed # シーダー実行 <br>
 
+git rm -rf docker/mysql --cached # git ignore に追加したファイルを git から削除 git ignoreの変更を反映 <br>
+
 <h2>データベースについて</h2>
 データベース名: posse <br>
 ユーザー名: root <br>

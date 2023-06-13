@@ -10,8 +10,11 @@
     answerContainer = document.querySelector("#answer_container");
 
     let addOption = `
-        <div class="gap-2">
-          <label for="option_${inputCount}">選択肢${inputCount}</label>
+        <div class="flex items-center justify-center gap-2">
+          <label for="option_${inputCount}">
+            選択肢${inputCount}
+            <span class="text-red-600">※必須</span>
+          </label>
           <input type="text" name="option[]" id="option_${inputCount}">
         </div>
     `;

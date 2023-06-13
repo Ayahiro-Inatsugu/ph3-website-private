@@ -17,36 +17,50 @@
         <form action="{{ route('quizzes.store') }}" method="post" class="flex flex-col items-center justify-center w-full gap-12">
           @csrf
           <div class="flex items-center gap-8">
-            <label for="question">問題</label>
-            <input type="text" name="question" id="question">
+            <div>
+              <label for="question">問題</label>
+              <span class="text-red-600">※必須</span>
+            </div>
+            <input type="text" name="question" id="question" required>
           </div>
           <div id="option_container" class="flex flex-col items-center justify-center w-full gap-12">
-            <div class="gap-2">
-              <label for="option_1">選択肢1</label>
-              <input type="text" name="option[]" id="option_1">
+            <div class="flex items-center justify-center gap-2">
+              <label for="option_1">選択肢1
+                <span class="text-red-600">※必須</span>
+              </label>
+              <input type="text" name="option[]" id="option_1" required>
             </div>
-            <div>
-              <label for="option_2">選択肢2</label>
-              <input type="text" name="option[]" id="option_2">
+            <div class="flex items-center justify-center gap-2">
+              <label for="option_2">
+                選択肢2
+                <span class="text-red-600">※必須</span>
+              </label>
+              <input type="text" name="option[]" id="option_2" required>
             </div>
-            <div>
-              <label for="option_3">選択肢3</label>
-              <input type="text" name="option[]" id="option_3">
+            <div class="flex items-center justify-center gap-2">
+              <label for="option_3">
+                選択肢3
+                <span class="text-red-600">※必須</span>
+              </label>
+              <input type="text" name="option[]" id="option_3" required>
             </div>
           </div>
 
           <div id="answer_container" class="flex-wrap">
-            <p>正解</p>
-            <input type="radio" name="answer" id="answer_1" value="1">
+            <p>
+              正解
+              <span class="text-red-600">※必須</span>
+            </p>
+            <input type="radio" name="answer" id="answer_1" value="1" required>
             <label for="answer_1">選択肢１</label>
-            <input type="radio" name="answer" id="answer_2" value="2">
+            <input type="radio" name="answer" id="answer_2" value="2" required>
             <label for="answer_2">選択肢２</label>
-            <input type="radio" name="answer" id="answer_3" value="3">
+            <input type="radio" name="answer" id="answer_3" value="3" required>
             <label for="answer_3">選択肢３</label>
           </div>
 
           <div class="flex items-center justify-center gap-4">
-            <input type="submit" class="border" value="作成">
+            <input type="submit" class="border" value="作成" required>
           </div>
         </form>
         <button id="add_input_button" class="border">選択肢追加</button>
