@@ -1,5 +1,5 @@
 <header class="flex items-center justify-between w-screen h-20 px-8 bg-white fixed top-0 z-50">
-  <div class="p_header_logo">
+  <div>
       <img src="{{ asset('storage/icon/posse-logo.svg') }}" alt="POSSEロゴ">
   </div>
   <nav>
