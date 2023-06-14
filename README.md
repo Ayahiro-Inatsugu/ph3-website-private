@@ -3,6 +3,7 @@ docker compose up -d # コンテナ立ち上げ <br>
 docker compose exec app bash # コンテナに入る <br>
 composer install # ライブラリインストール <br>
 npm install # ライブラリインストール <br>
+npm run build # js, css ビルド <br>
 
 <h2>コマンド集</h2>
 php artisan make:controller コントローラー名 # コントローラー作成 <br>

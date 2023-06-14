@@ -26,8 +26,8 @@
           </ul>
         </div>
         <div>
-          <a href="{{ asset() }}">
-            <button>編集</button>
+          <a href="{{ route('quizzes.edit', $question->id) }}">
+            <button class="border text-white bg-green-400 p-2">編集</button>
           </a>
         </div>
       </div>

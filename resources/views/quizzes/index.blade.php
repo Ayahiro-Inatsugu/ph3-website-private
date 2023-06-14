@@ -23,16 +23,19 @@
           <div class="flex flex-col items-center justify-center w-full gap-4">
             <div class="flex items-center justify-center">
               <span>問題{{ $quiz_key + 1 }}</span>
-              <span class="flex gap-2">
-                <a href="">
+              <div class="flex gap-2">
+                <a href="{{ route('quizzes.edit', $quiz->id) }}">
                   <button class="border text-white bg-green-400 p-2">編集</button>
                 </a>
                 <form action="{{ route('quizzes.destroy', $quiz->id) }}" method="POST">
                   @csrf
                   @method('DELETE')
-                  <button type="submit" class="border text-white bg-red-500 p-2" >削除</button>
+                  <button type="submit" class="border text-white bg-red-500 p-2">削除</button>
                 </form>
-              </span>
+                <a href="{{ route('quizzes.show', $quiz->id) }}">
+                  <button class="border text-white bg-blue-500 p-2">詳細</button>
+                </a>
+              </div>
             </div>
             <div class="flex flex-col items-center justify-center w-full gap-2">
               <p>{{ $quiz->text }}</p>
