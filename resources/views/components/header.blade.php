@@ -1,11 +1,13 @@
 <header class="flex items-center justify-between w-screen h-20 px-8 bg-white fixed top-0 z-50">
   <div>
+    <a href="{{ asset('/') }}">
       <img src="{{ asset('storage/icon/posse-logo.svg') }}" alt="POSSEロゴ">
+    </a>
   </div>
   <nav>
       <ul class="flex items-center justify-center gap-8 text-sm font-bold text-gray-500">
-          <li><a href="../index.html">POSSEとは</a></li>
-          <li><a href="index.html">クイズ</a></li>
+          <li><a href="{{ asset('/') }}">POSSEとは</a></li>
+          <li><a href="{{ asset('quizzes') }}">クイズ</a></li>
           <li class="border rounded-full p-3">
             <a href="https://twitter.com/posse_program">
               <img src="{{ asset('storage/icon/icon-twitter.svg') }}" alt="Twitterアイコン">
