@@ -46,7 +46,15 @@ class QuizController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try{
+            $question_instance = new Question();
+            $question = $question_instance->findOrFail($id);
+            // クイズのデータを取得してshow.blade.phpに渡す
+            return view('quizzes.show', compact('question'));
+        } catch (\Exception $e) {
+            session()->flash('message', 'クイズが見つかりませんでした');
+            return redirect()->route('quizzes.index');
+        }
     }
 
     /**
