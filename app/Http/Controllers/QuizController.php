@@ -16,13 +16,13 @@ class QuizController extends Controller
     public function index()
     {
         $quizzes = Question::getQuizData();
-        return view('quizzes.index', compact('quizzes'));
+        return view('admin.index', compact('quizzes'));
     }
 
     // 新規作成画面を表示する
     public function create()
     {
-        return view('quizzes.create');
+        return view('admin.create');
     }
 
     /**
@@ -32,12 +32,11 @@ class QuizController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        // dd($data);
-        $question = new Question();
-        $question::add($data);
+        $quiz = new Question();
+        $quiz::add($data);
 
         session()->flash('message', 'クイズを作成しました');
-        return redirect()->route('quizzes.index');
+        return redirect()->route('admin.index');
     }
 
 
@@ -47,13 +46,13 @@ class QuizController extends Controller
     public function show(string $id)
     {
         try {
-            $question_instance = new Question();
-            $question = $question_instance->findOrFail($id);
+            $quizzes_instance = new Question();
+            $quiz = $quizzes_instance->findOrFail($id);
             // クイズのデータを取得してshow.blade.phpに渡す
-            return view('quizzes.show', compact('question'));
+            return view('admin.show', compact('quiz'));
         } catch (\Exception $e) {
             session()->flash('message', 'クイズが見つかりませんでした');
-            return redirect()->route('quizzes.index');
+            return redirect()->route('admin.index');
         }
     }
 
@@ -63,13 +62,13 @@ class QuizController extends Controller
     public function edit(string $id)
     {
         try {
-            $question_instance = new Question();
-            $question = $question_instance->findOrFail($id);
+            $quizzes_instance = new Question();
+            $quiz = $quizzes_instance->findOrFail($id);
             // クイズのデータを取得してedit.blade.phpに渡す
-            return view('quizzes.edit', compact('question'));
+            return view('admin.edit', compact('quiz'));
         } catch (\Exception $e) {
             session()->flash('message', 'クイズが見つかりませんでした');
-            return redirect()->route('quizzes.index');
+            return redirect()->route('admin.index');
         }
     }
 
@@ -79,12 +78,12 @@ class QuizController extends Controller
     public function update(Request $request, string $id)
     {
         $data = $request->all();
-        $question = Question::findOrFail($id);
-        $question->text = $data['text'];
-        $question->save();
+        $quiz = Question::findOrFail($id);
+        $quiz->text = $data['text'];
+        $quiz->save();
 
         foreach ($data['option'] as $key => $option) {
-            $opt = $question->options()->findOrFail($data['optionId'][$key]);
+            $opt = $quiz->options()->findOrFail($data['optionId'][$key]);
             try {
                 $opt->text = $option;
                 $opt->is_correct = ((int)$data['answer'] === $key + 1);
@@ -96,7 +95,7 @@ class QuizController extends Controller
     }
 
     session()->flash('message', 'クイズを更新しました');
-    return redirect()->route('quizzes.index');
+    return redirect()->route('admin.index');
     }
 
     /**
@@ -104,9 +103,9 @@ class QuizController extends Controller
      */
     public function destroy(string $id)
     {
-        $question = Question::findOrFail($id);
-        $question->delete();
+        $quiz = Question::findOrFail($id);
+        $quiz->delete();
         session()->flash('message', 'クイズを削除しました');
-        return redirect()->route('quizzes.index');
+        return redirect()->route('admin.index');
     }
 }

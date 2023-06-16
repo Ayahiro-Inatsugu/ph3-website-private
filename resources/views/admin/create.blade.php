@@ -1,15 +1,5 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>クイズ新規作成</title>
-  @vite('resources/css/app.css')
-</head>
-<body>
-  <x-layout>
-    <main class="flex flex-col items-center justify-center w-screen mt-20 mb-20 gap-16">
+<x-app-layout>
+    <div class="flex flex-col items-center justify-center w-screen mt-20 mb-20 gap-16">
       <div class="mb-8">
         <h1 class="text-4xl font-bold py-12">クイズ新規作成</h1>
       </div>
@@ -65,8 +55,6 @@
         </form>
         <button id="add_input_button" class="border">選択肢追加</button>
       </div>
-    </main>
-  </x-layout>
+    </div>
   <script src="{{ asset('js/createQuestion.js') }}"></script>
-</body>
-</html>
+</x-app-layout>
