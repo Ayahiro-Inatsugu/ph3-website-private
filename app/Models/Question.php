@@ -37,7 +37,7 @@ class Question extends Model
         foreach ($data['option'] as $key => $option) {
             $question->options()->create([
                 'text' => $option,
-                'is_correct' => ((int)$data['answer'] === $key - 1),
+                'is_correct' => ((int)$data['answer'] === $key + 1),
             ]);
         };
 

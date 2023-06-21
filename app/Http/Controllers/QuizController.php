@@ -59,6 +59,7 @@ class QuizController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
+    // クイズのデータを取得してedit.blade.phpに渡す
     public function edit(string $id)
     {
         try {
@@ -75,6 +76,7 @@ class QuizController extends Controller
     /**
      * Update the specified resource in storage.
      */
+    // クイズのデータを更新する
     public function update(Request $request, string $id)
     {
         $data = $request->all();
@@ -92,7 +94,7 @@ class QuizController extends Controller
                 session()->flash('message', 'クイズの更新に失敗しました');
                 $opt->delete();
             }
-    }
+        }
 
     session()->flash('message', 'クイズを更新しました');
     return redirect()->route('admin.index');
@@ -101,11 +103,17 @@ class QuizController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    // クイズのデータを削除する
     public function destroy(string $id)
     {
         $quiz = Question::findOrFail($id);
-        $quiz->delete();
-        session()->flash('message', 'クイズを削除しました');
-        return redirect()->route('admin.index');
+        try {
+            $quiz->delete();
+            session()->flash('message', 'クイズを削除しました');
+            return redirect()->route('admin.index');
+        } catch (\Exception $e) {
+            session()->flash('message', 'クイズの削除に失敗しました');
+            return redirect()->route('admin.index');
+        }
     }
 }

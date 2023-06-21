@@ -17,7 +17,7 @@
               <a href="{{ route('admin.edit', $quiz->id) }}">
                 <button class="border text-white bg-green-400 p-2">編集</button>
               </a>
-              <form action="{{ route('admin.destroy', $quiz->id) }}" method="POST">
+              <form action="{{ route('admin.destroy', $quiz->id) }}" method="POST" id="delete_form">
                 @csrf
                 @method('DELETE')
                 <button type="submit" id="delete_btn" class="border text-white bg-red-500 p-2">削除</button>
@@ -44,7 +44,7 @@
           </div>
         </div>
       @endforeach
-    <a href="/admin/create">クイズ新規作成</a>
+    <a href="{{ route('admin.create') }}">クイズ新規作成</a>
   </main>
   <script src="{{ asset('js/deleteQuestion.js') }}"></script>
 </x-app-layout>
