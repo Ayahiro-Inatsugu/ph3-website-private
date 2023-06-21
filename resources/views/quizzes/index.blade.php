@@ -14,19 +14,25 @@
 
       <div class="flex flex-col items-center justify-center w-screen gap-12">
         <div class="flex flex-col items-center justify-center w-screen gap-12">
-          @foreach ($quizzes as $quiz)
-          <div class="flex flex-col items-center justify-center w-2/3">
-            <p>{{ $quiz->text }}</p>
-            <div class="flex flex-col items-center justify-center w-full gap-12">
-              @foreach ($quiz->options as $option)
+          @foreach ($quizzes as $quiz_key => $quiz)
+          <div class="flex flex-col justify-center w-2/3 gap-4">
+            <p class="text-xl font-bold">
+              <span>問題{{ $quiz_key + 1 }}:</span>
+              {{ $quiz->text }}
+            </p>
+            <div class="flex flex-col justify-center w-1/2 gap-4">
+              @foreach ($quiz->options as $option_key => $option)
               <div>
-                <p>{{ $option->text }}</p>
+                <button id="option_btn" data-is-correct="{{ $option->is_correct }}">
+                  <span>選択肢{{ $option_key + 1 }}:</span>
+                  {{ $option->text }}
+                </button>
               </div>
               @endforeach
             </div>
           </div>
           @endforeach
   </x-layout>
-  <script src="{{ asset('js/deleteQuestion.js') }}"></script>
+  <script src="{{ asset('js/judgeQuestion.js') }}"></script>
 </body>
 </html>

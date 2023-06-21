@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Question;
+use App\Models\Option;
 
 class QuestionSeeder extends Seeder
 {
@@ -37,5 +38,16 @@ class QuestionSeeder extends Seeder
         Question::create([
             'text' => 'たかぴろが一番得意な楽器は何でしょう？',
         ]);
+
+        Question::factory()
+            ->count(20) 
+            ->create()
+            ->each(function ($question) {
+                // 各Questionに対して3つのis_correctが0のOptionを作成
+                Option::factory()->count(3)->create(['question_id' => $question->id]);
+
+                // 各Questionに対して1つのis_correctが1のOptionを作成
+                Option::factory()->state(['is_correct' => 1])->create(['question_id' => $question->id]);
+            });
     }
 }
