@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\QuizController;
+use App\Models\Question;
+use App\Models\Option;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +37,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::resource('/quizzes', QuizController::class);
+Route::get('/quizzes', function () {
+    $quizzes = Question::getQuizData();
+    return view('quizzes.index', compact('quizzes'));
+});
 
 // 管理画面
 // ユーザー登録画面
