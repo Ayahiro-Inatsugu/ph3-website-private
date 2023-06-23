@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\QuizController;
+use App\Models\Question;
+use App\Models\Option;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,10 +22,6 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -34,4 +32,21 @@ require __DIR__.'/auth.php';
 
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
 
-Route::resource('/quizzes', QuizController::class);
+// dashboard
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+Route::get('/quizzes', function () {
+    $quizzes = Question::getQuizData();
+    return view('quizzes.index', compact('quizzes'));
+});
+
+// 管理画面
+// ユーザー登録画面
+Route::get('/admin/register', function () {
+    return view('auth.register');
+});
+
+// トップ画面
+Route::resource('/admin', QuizController::class)->middleware(['auth', 'verified']);

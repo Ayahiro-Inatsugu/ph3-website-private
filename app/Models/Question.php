@@ -24,7 +24,13 @@ class Question extends Model
     // クイズのデータをwithで取得する
     static function getQuizData()
     {
-        return self::with('options')->get();
+        return self::with('options')->paginate(20);
+    }
+
+    // 論理削除した問題を含めて全てのクイズを取得する
+    static function getQuizDataWithTrashed()
+    {
+        return self::with('options')->withTrashed()->paginate(20);
     }
 
     // レコードを追加
@@ -32,12 +38,13 @@ class Question extends Model
     {
         $question = new Question();
         $question->text = $data['question'];
-        $question->save();
+        dd($question);
 
         foreach ($data['option'] as $key => $option) {
             $question->options()->create([
+                'question_id' => $question->id,
                 'text' => $option,
-                'is_correct' => ((int)$data['answer'] === $key - 1),
+                'is_correct' => ((int)$data['answer'] === $key + 1),
             ]);
         };
 

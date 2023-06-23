@@ -12,48 +12,31 @@
     <main class="flex flex-col items-center justify-center w-screen mt-20 mb-20">
       <h1 class="text-4xl font-bold py-12">クイズ</h1>
 
-      @if (session('message'))
-        <div class="alert text-red text-center py-4">
-          {{ session('message') }}
-        </div>
-      @endif
-
-      <div class="flex flex-col items-center justify-center w-full gap-12 mt-12">
+      <div class="flex flex-col items-center justify-center w-screen gap-12">
         @foreach ($quizzes as $quiz_key => $quiz)
-          <div class="flex flex-col items-center justify-center w-full gap-4">
-            <div class="flex items-center justify-center">
-              <span>問題{{ $quiz_key + 1 }}</span>
-              <span class="flex gap-2">
-                <a href="">
-                  <button class="border text-white bg-green-400 p-2">編集</button>
-                </a>
-                <form action="{{ route('quizzes.destroy', $quiz->id) }}" method="POST">
-                  @csrf
-                  @method('DELETE')
-                  <button type="submit" class="border text-white bg-red-500 p-2" >削除</button>
-                </form>
-              </span>
+        <div class="flex flex-col justify-center w-2/3 gap-4">
+          <p class="text-xl font-bold">
+            <span>問題{{ ($quizzes->currentPage() - 1) * $quizzes->perPage() + $quiz_key + 1 }}:</span>
+            {{ $quiz->text }}
+          </p>
+          <div class="flex flex-col justify-center w-1/2 gap-4">
+            @foreach ($quiz->options as $option_key => $option)
+            <div>
+              <button id="option_btn" data-is-correct="{{ $option->is_correct }}">
+                <span>選択肢{{ $option_key + 1 }}:</span>
+                {{ $option->text }}
+              </button>
             </div>
-            <div class="flex flex-col items-center justify-center w-full gap-2">
-              <p>{{ $quiz->text }}</p>
-            </div>
-            <div class="flex flex-col items-center justify-center w-full gap-2">
-              @foreach ($quiz->options as $option_key => $option)
-              <p>
-                選択肢{{ $option_key + 1 }}：{{ $option->text }}
-                <span>
-                  @if ($option->is_correct)
-                    (正解)
-                  @endif  
-                </span>
-              </p>
-              @endforeach
-            </div>
+            @endforeach
           </div>
+        </div>
         @endforeach
-
-      <a href="/quizzes/create">クイズ新規作成</a>
+      </div>
+      <div class="fle flex-col mt-4">
+        {{ $quizzes->links() }}
+      </div>
     </main>
   </x-layout>
+  <script src="{{ asset('js/judgeQuestion.js') }}"></script>
 </body>
 </html>
