@@ -40,13 +40,12 @@ class QuizController extends Controller
         // 画像アップロード
         $image = $data['image'];
 
-        // dd($image);
-
         if ($image) {
-            $dir = 'quizzes';
+            $dir = 'public/img/quizzes';
             $image_extension = $image->getClientOriginalExtension();
             $file_name = $quiz->id . uniqid() . '.' . $image_extension;
-            $image->storeAs('public/img/' . $dir, $file_name);
+
+            Storage::disk('public')->put($dir . '/' . $file_name, File::get($image));
             $quiz->image = $file_name;
         }
         

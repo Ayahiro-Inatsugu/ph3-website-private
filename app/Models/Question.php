@@ -38,10 +38,11 @@ class Question extends Model
     {
         $question = new Question();
         $question->text = $data['question'];
-        $question->save();
+        dd($question);
 
         foreach ($data['option'] as $key => $option) {
             $question->options()->create([
+                'question_id' => $question->id,
                 'text' => $option,
                 'is_correct' => ((int)$data['answer'] === $key + 1),
             ]);
