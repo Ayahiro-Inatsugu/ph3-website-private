@@ -13,25 +13,29 @@
       <h1 class="text-4xl font-bold py-12">クイズ</h1>
 
       <div class="flex flex-col items-center justify-center w-screen gap-12">
-        <div class="flex flex-col items-center justify-center w-screen gap-12">
-          @foreach ($quizzes as $quiz_key => $quiz)
-          <div class="flex flex-col justify-center w-2/3 gap-4">
-            <p class="text-xl font-bold">
-              <span>問題{{ $quiz_key + 1 }}:</span>
-              {{ $quiz->text }}
-            </p>
-            <div class="flex flex-col justify-center w-1/2 gap-4">
-              @foreach ($quiz->options as $option_key => $option)
-              <div>
-                <button id="option_btn" data-is-correct="{{ $option->is_correct }}">
-                  <span>選択肢{{ $option_key + 1 }}:</span>
-                  {{ $option->text }}
-                </button>
-              </div>
-              @endforeach
+        @foreach ($quizzes as $quiz_key => $quiz)
+        <div class="flex flex-col justify-center w-2/3 gap-4">
+          <p class="text-xl font-bold">
+            <span>問題{{ ($quizzes->currentPage() - 1) * $quizzes->perPage() + $quiz_key + 1 }}:</span>
+            {{ $quiz->text }}
+          </p>
+          <div class="flex flex-col justify-center w-1/2 gap-4">
+            @foreach ($quiz->options as $option_key => $option)
+            <div>
+              <button id="option_btn" data-is-correct="{{ $option->is_correct }}">
+                <span>選択肢{{ $option_key + 1 }}:</span>
+                {{ $option->text }}
+              </button>
             </div>
+            @endforeach
           </div>
-          @endforeach
+        </div>
+        @endforeach
+      </div>
+      <div class="fle flex-col mt-4">
+        {{ $quizzes->links() }}
+      </div>
+    </main>
   </x-layout>
   <script src="{{ asset('js/judgeQuestion.js') }}"></script>
 </body>

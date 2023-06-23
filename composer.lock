@@ -5510,16 +5510,16 @@
     "packages-dev": [
         {
             "name": "askdkc/breezejp",
-            "version": "v1.6.2",
+            "version": "v1.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/askdkc/breezejp.git",
-                "reference": "d3c6f503e8ddf5c4665dd56861758c6b7855a3fa"
+                "reference": "aac4b379f25868f55991675e025a9f033a0e62dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/askdkc/breezejp/zipball/d3c6f503e8ddf5c4665dd56861758c6b7855a3fa",
-                "reference": "d3c6f503e8ddf5c4665dd56861758c6b7855a3fa",
+                "url": "https://api.github.com/repos/askdkc/breezejp/zipball/aac4b379f25868f55991675e025a9f033a0e62dc",
+                "reference": "aac4b379f25868f55991675e025a9f033a0e62dc",
                 "shasum": ""
             },
             "require": {
@@ -5576,9 +5576,9 @@
             ],
             "support": {
                 "issues": "https://github.com/askdkc/breezejp/issues",
-                "source": "https://github.com/askdkc/breezejp/tree/v1.6.2"
+                "source": "https://github.com/askdkc/breezejp/tree/v1.6.3"
             },
-            "time": "2023-06-02T01:19:12+00:00"
+            "time": "2023-06-21T15:01:07+00:00"
         },
         {
             "name": "clue/phar-composer",

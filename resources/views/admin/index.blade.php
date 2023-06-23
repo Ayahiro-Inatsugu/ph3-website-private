@@ -10,9 +10,9 @@
 
     <div class="flex flex-col items-center justify-center w-full gap-12 mt-12">
       @foreach ($quizzes as $quiz_key => $quiz)
-        <div class="flex flex-col items-center justify-center w-full gap-4">
+        <div class="flex flex-col items-center justify-center w-full gap-4 {{ $quiz->deleted_at ? 'text-red-500' : '' }}">
           <div class="flex items-center justify-center">
-            <span>問題{{ $quiz_key + 1 }}</span>
+            <span>問題{{ ($quizzes->currentPage() - 1) * $quizzes->perPage() + $quiz_key + 1 }}</span>
             <div class="flex gap-2">
               <a href="{{ route('admin.edit', $quiz->id) }}">
                 <button class="border text-white bg-green-400 p-2">編集</button>
@@ -27,8 +27,19 @@
               </a>
             </div>
           </div>
+          {{-- 画像があるなら表示 --}}
+          @if($quiz->image_path)
+            <div class="flex items-center justify-center">
+              <img src="{{ asset('storage/images/' . $quiz->image_path) }}" alt="quiz_image" class="w-1/2">
+            </div>
+          @endif
           <div class="flex flex-col items-center justify-center w-full gap-2">
-            <p>{{ $quiz->text }}</p>
+            <p>
+              @if($quiz->deleted_at)
+                (削除済み)
+              @endif
+              {{ $quiz->text }}
+            </p>
           </div>
           <div class="flex flex-col items-center justify-center w-full gap-2">
             @foreach ($quiz->options as $option_key => $option)
@@ -44,6 +55,9 @@
           </div>
         </div>
       @endforeach
+      <div class="fle flex-col mt-4">
+        {{ $quizzes->links() }}
+      </div>
     <a href="{{ route('admin.create') }}">クイズ新規作成</a>
   </main>
   <script src="{{ asset('js/deleteQuestion.js') }}"></script>

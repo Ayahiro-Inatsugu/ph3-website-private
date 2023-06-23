@@ -4,7 +4,7 @@
         <h1 class="text-4xl font-bold py-12">クイズ新規作成</h1>
       </div>
       <div class="flex flex-col justify-cente w-screen">
-        <form action="{{ route('quizzes.store') }}" method="post" class="flex flex-col items-center justify-center w-full gap-12">
+        <form action="{{ route('admin.store') }}" method="post" enctype="multipart/form-data" class="flex flex-col items-center justify-center w-full gap-12">
           @csrf
           <div class="flex items-center gap-8">
             <div>
@@ -47,6 +47,13 @@
             <label for="answer_2">選択肢２</label>
             <input type="radio" name="answer" id="answer_3" value="3" required>
             <label for="answer_3">選択肢３</label>
+          </div>
+
+          <div class="flex items-center justify-center gap-8">
+            <div>
+              <label for="image">画像</label>
+            </div>
+            <input type="file" name="image" id="image">
           </div>
 
           <div class="flex items-center justify-center gap-4">

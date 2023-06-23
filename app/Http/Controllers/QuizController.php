@@ -6,6 +6,8 @@ use App\Models\Question;
 use App\Models\Option;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class QuizController extends Controller
 {
@@ -15,7 +17,7 @@ class QuizController extends Controller
     // クイズのデータを取得してindex.blade.phpに渡す
     public function index()
     {
-        $quizzes = Question::getQuizData();
+        $quizzes = Question::getQuizDataWithTrashed();
         return view('admin.index', compact('quizzes'));
     }
 
@@ -35,6 +37,21 @@ class QuizController extends Controller
         $quiz = new Question();
         $quiz::add($data);
 
+        // 画像アップロード
+        $image = $data['image'];
+
+        // dd($image);
+
+        if ($image) {
+            $dir = 'quizzes';
+            $image_extension = $image->getClientOriginalExtension();
+            $file_name = $quiz->id . uniqid() . '.' . $image_extension;
+            $image->storeAs('public/img/' . $dir, $file_name);
+            $quiz->image = $file_name;
+        }
+        
+        $quiz->save();
+        
         session()->flash('message', 'クイズを作成しました');
         return redirect()->route('admin.index');
     }

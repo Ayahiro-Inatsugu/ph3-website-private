@@ -24,7 +24,13 @@ class Question extends Model
     // クイズのデータをwithで取得する
     static function getQuizData()
     {
-        return self::with('options')->get();
+        return self::with('options')->paginate(20);
+    }
+
+    // 論理削除した問題を含めて全てのクイズを取得する
+    static function getQuizDataWithTrashed()
+    {
+        return self::with('options')->withTrashed()->paginate(20);
     }
 
     // レコードを追加
