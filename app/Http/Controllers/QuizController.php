@@ -6,8 +6,6 @@ use App\Models\Question;
 use App\Models\Option;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\File;
 
 class QuizController extends Controller
 {
@@ -34,22 +32,7 @@ class QuizController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $quiz = new Question();
-        
-        // 画像アップロード
-        $image = $data['image'];
-        
-        if ($image) {
-            $dir = 'public/img/quizzes';
-            $image_extension = $image->getClientOriginalExtension();
-            $file_name = $quiz->id . uniqid() . '.' . $image_extension;
-            
-            Storage::disk('public')->put($dir . '/' . $file_name, File::get($image));
-            $quiz->image = $file_name;
-        }
-        
-        $quiz::add($data);
-        $quiz->save();
+        Question::add($data);
         
         session()->flash('message', 'クイズを作成しました');
         return redirect()->route('admin.index');
