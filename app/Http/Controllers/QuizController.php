@@ -35,20 +35,20 @@ class QuizController extends Controller
     {
         $data = $request->all();
         $quiz = new Question();
-        $quiz::add($data);
-
+        
         // 画像アップロード
         $image = $data['image'];
-
+        
         if ($image) {
             $dir = 'public/img/quizzes';
             $image_extension = $image->getClientOriginalExtension();
             $file_name = $quiz->id . uniqid() . '.' . $image_extension;
-
+            
             Storage::disk('public')->put($dir . '/' . $file_name, File::get($image));
             $quiz->image = $file_name;
         }
         
+        $quiz::add($data);
         $quiz->save();
         
         session()->flash('message', 'クイズを作成しました');
