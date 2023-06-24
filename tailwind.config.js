@@ -14,6 +14,9 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            backgroundImage: theme => ({
+                'bg-image-line': "url('/storage/app/public/bg-line.jpg')",
+            })
         },
     },
 

@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-</head>
-<body>
-  <div class="container">
-    {{ $slot }}
-  </div>
+<body class="h-screen">
+  <x-header/>
+  {{ $slot }}
+  <x-footer/>
 </body>
-</html>
