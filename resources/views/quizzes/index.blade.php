@@ -19,6 +19,9 @@
             <span>問題{{ ($quizzes->currentPage() - 1) * $quizzes->perPage() + $quiz_key + 1 }}:</span>
             {{ $quiz->text }}
           </p>
+          @if ($quiz->image)
+            <img src="{{ asset('storage/img/quizzes/' . $quiz->image) }}" alt="quiz_image" class="w-1/2">
+          @endif
           <div class="flex flex-col justify-center w-1/2 gap-4">
             @foreach ($quiz->options as $option_key => $option)
             <div>
