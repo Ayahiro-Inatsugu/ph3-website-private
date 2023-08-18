@@ -93,3 +93,6 @@ git rm -rf docker/mysql --cached # git ignore に追加したファイルを git
 +--------------+--------| text          |
                         | is_correct    |
                         +---------------+
+
+
+変更したよー
