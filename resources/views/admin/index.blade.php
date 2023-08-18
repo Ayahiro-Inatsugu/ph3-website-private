@@ -2,8 +2,14 @@
   <div class="flex flex-col items-center justify-center w-screen mt-20 mb-20">
     <h1 class="text-4xl font-bold py-12">クイズ</h1>
 
+    @if (session('error'))
+      <div class="alert text-red-500 text-center py-4">
+        {{ session('error') }}
+      </div>
+    @endif
+
     @if (session('message'))
-      <div class="alert text-red text-center py-4">
+      <div class="alert text-center py-4">
         {{ session('message') }}
       </div>
     @endif

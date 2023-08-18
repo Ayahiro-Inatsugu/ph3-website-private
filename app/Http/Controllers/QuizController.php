@@ -32,6 +32,11 @@ class QuizController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        // クイズの問題文の長さが200文字以上だった場合のバリデーション
+        if (mb_strlen($data['question']) > 250) {
+            session()->flash('error', '問題文は250文字以内で入力してください');
+            return redirect()->route('admin.index');
+        }
         Question::add($data);
         
         session()->flash('message', 'クイズを作成しました');

@@ -39,6 +39,7 @@ class Question extends Model
     public static function add(array $data)
     {
         $quiz = new self();
+
         // 画像アップロード
         $image = $data['image'];
         
@@ -50,6 +51,7 @@ class Question extends Model
             Storage::disk('public')->put($dir . '/' . $file_name, File::get($image));
             $quiz->image = $file_name;
         }
+
         $quiz->text = $data['question'];
         $quiz->save();
 
